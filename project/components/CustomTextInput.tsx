@@ -2,24 +2,38 @@
 import React from 'react';
 import {TextInput} from 'react-native';
 type Props = {
-	type: string;
+	type: 'fullName' | 'username' | 'email' | 'password';
 };
 
 const CustomTextInput: React.FC<Props> = ({type}: Props) => {
 	const renderTextInput = (inputType: string) => {
 		if (inputType == 'fullName') {
-			return <TextInput placeholder="Full Name" />;
+			return <TextInput style={styles.input} placeholder="Full Name" />;
 		} else if (inputType == 'username') {
-			return <TextInput placeholder="Username" />;
+			return <TextInput style={styles.input} placeholder="Username" />;
 		} else if (inputType == 'email') {
 			return (
-				<TextInput placeholder="email" keyboardType="email-address" />
+				<TextInput
+					style={styles.input}
+					placeholder="Email"
+					keyboardType="email-address"
+				/>
 			);
-		} else if (inputType == 'username') {
-			return <TextInput placeholder="Username" />;
+		} else if (inputType == 'password') {
+			return <TextInput style={styles.input} placeholder="Password" />;
 		}
 	};
-	return <></>;
+	return <>{renderTextInput(type)}</>;
 };
 
+const styles = {
+	input: {
+		borderColor: 'gray',
+		borderWidth: 1,
+		width: '80%',
+		borderRadius: 5,
+		marginVertical: 15,
+		paddingLeft: 15,
+	},
+};
 export default CustomTextInput;

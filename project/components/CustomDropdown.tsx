@@ -1,65 +1,15 @@
 import React, {useState} from 'react';
-import SelectDropdown from 'react-native-select-dropdown';
-import DropDownPicker, {
-	DropDownPickerProps,
-	ItemType,
-	ValueType,
-} from 'react-native-dropdown-picker';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 type Props = {
-	type?: string;
+	data: {label: string; value: string}[];
+	placeHolder: string;
 };
 
-const createYearList = () => {
-	let years = [];
-	let i = 0;
-	let year = 1923;
-	while (i <= 100) {
-		let listItem = {label: year.toString(), value: year.toString()};
-		years.push(listItem);
-		year++;
-		i++;
-	}
-	return years;
-};
-
-const createDayList = () => {
-	let days = [];
-	let i = 1;
-	while (i < 31) {
-		let listItem = {label: i.toString(), value: i.toString()};
-		days.push(listItem);
-		i++;
-	}
-	return days;
-};
-
-const CustomDropdown: React.FC<Props> = ({type}: Props) => {
-	const months = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
-	];
-
-	const days = createDayList();
-
-	const years = createYearList();
-
+const CustomDropdown: React.FC<Props> = ({data, placeHolder}: Props) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(null);
-	const [items, setItems] = useState(days);
-
-	console.log(days);
-	console.log(years);
+	const [items, setItems] = useState(data);
 
 	return (
 		<DropDownPicker
@@ -69,18 +19,14 @@ const CustomDropdown: React.FC<Props> = ({type}: Props) => {
 			setOpen={setOpen}
 			setValue={setValue}
 			setItems={setItems}
-			placeholder={'Jeg'}
+			placeholder={placeHolder}
 			style={{
 				borderRadius: 3,
 				borderColor: '#b7dffd',
 				width: 100,
-				marginTop: 10,
-				marginBottom: 10,
-				marginHorizontal: 0,
-				padding: 0,
 			}}
 			onChangeValue={val => {
-				console.log(val);
+				// console.log(val);
 			}}
 		/>
 	);
@@ -88,7 +34,6 @@ const CustomDropdown: React.FC<Props> = ({type}: Props) => {
 
 const styles = {
 	select: {
-		flex: 0.3,
 		borderRadius: 5,
 		backgroundColor: 'white',
 		borderWidth: 1,
