@@ -4,9 +4,14 @@ import DropDownPicker from 'react-native-dropdown-picker';
 type Props = {
 	data: {label: string; value: string}[];
 	placeHolder: string;
+	setDropdownValue: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
-const CustomDropdown: React.FC<Props> = ({data, placeHolder}: Props) => {
+const CustomDropdown: React.FC<Props> = ({
+	data,
+	placeHolder,
+	setDropdownValue,
+}: Props) => {
 	const [open, setOpen] = useState(false);
 	const [value, setValue] = useState(null);
 	const [items, setItems] = useState(data);
@@ -25,23 +30,13 @@ const CustomDropdown: React.FC<Props> = ({data, placeHolder}: Props) => {
 				borderColor: '#b7dffd',
 				width: 100,
 			}}
+			dropDownContainerStyle={{height: 130}}
 			onChangeValue={val => {
-				// console.log(val);
+				setDropdownValue(val);
 			}}
+			dropDownDirection={'TOP'}
 		/>
 	);
-};
-
-const styles = {
-	select: {
-		borderRadius: 5,
-		backgroundColor: 'white',
-		borderWidth: 1,
-		borderColor: 'lightgrey',
-	},
-	text: {
-		fontSize: 12,
-	},
 };
 
 export default CustomDropdown;
