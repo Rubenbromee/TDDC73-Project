@@ -17,7 +17,7 @@ export const passwordChecker = (password: string) => {
 	if (password.length >= 8) {
 		fulfilledReq++;
 	} else {
-		returnObject.feedbackMessage += 'Not enough characters. ';
+		returnObject.feedbackMessage += 'Less than 8 characters. ';
 	}
 
 	// Check that password contains special characters
